@@ -29,7 +29,7 @@ contract P2PTempInsuranceFactory {
          );
         created[msg.sender].push(address(newContract));
         ContractInstantiation(msg.sender, address(newContract));
-        
+        newContract.transferOwnership(msg.sender);
         isP2PTempInsurance[address(newContract)] = true;
         return address(newContract);
     }
