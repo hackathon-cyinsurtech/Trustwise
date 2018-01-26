@@ -74,7 +74,7 @@ contract P2PTempInsurance is owned {
         uint256 amount;
         if (lowestBidder == 0x0) {
             amount = lowestPremium;
-            if (amount == 0) return success;
+            if (amount == 0) return false;
             lowestPremium = 0;
             if (!owner.send(amount)) {
                 lowestPremium = amount;
@@ -82,7 +82,7 @@ contract P2PTempInsurance is owned {
             }
         } else {
             amount = paybackPremium;
-            if (amount == 0) return success;
+            if (amount == 0) return false;
             paybackPremium = 0;
             if (!owner.send(amount)) {
                 paybackPremium = amount;
@@ -95,7 +95,7 @@ contract P2PTempInsurance is owned {
     function withdrawBid() public returns (bool success) {
         success = true;
         uint256 amount = returnAmounts[msg.sender];
-        if (amount == 0) return success;
+        if (amount == 0) return false;
         returnAmounts[msg.sender] = 0;
         if (!msg.sender.send(amount)) {
             returnAmounts[msg.sender] = amount;
