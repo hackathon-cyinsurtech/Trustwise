@@ -61,7 +61,7 @@ contract P2PTempInsurance is owned {
         lowestBidder == 0x0 ? require(premium <= lowestPremium) : require(premium < lowestPremium);
         require(now < startTime);
         require(msg.value == payout);
-        if (lowestBidder != 0x0) returnAmounts[msg.sender] += payout;
+        if (lowestBidder != 0x0) returnAmounts[lowestBidder] += payout;
         lowestPremium = premium;
         lowestBidder = msg.sender;
         paybackPremium = startPremium - lowestPremium;
