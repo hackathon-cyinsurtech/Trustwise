@@ -1,4 +1,13 @@
-/* body {
-   background-image: url("images/paper.gif");
-   background-color: #cccccc;
-} */
+body {
+    background-color: #00000000 !important;
+    background-image: url("https://i.imgur.com/OyTqJ1t.jpg");
+    background-position-y: center;
+}
+
+.jumbotron {
+    background-color: #e9ecef80 !important;
+}
+
+.card {
+    background-color: #fff6 !important;
+}
