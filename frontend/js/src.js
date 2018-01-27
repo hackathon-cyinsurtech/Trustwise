@@ -1,42 +1,20 @@
 $(document).ready(function(){
-  window.addEventListener('load', function () {
 
-      // Checking if Web3 has been injected by the browser (Mist/MetaMask)
-      if (typeof web3 !== 'undefined') {
-          // Use Mist/MetaMask's provider
-          web3js = new Web3(web3.currentProvider);
-      } else {
-          console.log('No web3? You should consider trying MetaMask!')
-          // fallback - use your fallback strategy (local node / hosted node + in-dapp id mgmt / fail)
-          web3js = new Web3(new Web3.providers.HttpProvider("http://localhost:8545"));
-      }
 
-      // Now you can start your app & access web3 freely:
-      startApp()
+  // Checking if Web3 has been injected by the browser (Mist/MetaMask)
+  if (typeof web3 !== 'undefined') {
+      // Use Mist/MetaMask's provider
+      web3 = new Web3(web3.currentProvider);
+      // eth = new Eth(web3.currentProvider);
+  } else {
+      console.log('No web3? You should consider trying MetaMask!')
+      // fallback - use your fallback strategy (local node / hosted node + in-dapp id mgmt / fail)
+      eth = new Web3(new Web3.providers.HttpProvider("http://localhost:8545"));
+  }
 
-  });
+
+
   console.log("ready");
-  web3.version.getNetwork((err, netId) => {
-      switch (netId) {
-          case "1":
-          console.log('This is mainnet')
-          break
-          case "2":
-          console.log('This is the deprecated Morden test network.')
-          break
-        case "3":
-        console.log('This is the ropsten test network.')
-          break
-          case "4":
-          console.log('This is the Rinkeby test network.')
-          break
-          case "42":
-          console.log('This is the Kovan test network.')
-          break
-          default:
-          console.log('This is an unknown network.')
-      }
-  })
 
 
 
@@ -53,7 +31,7 @@ $(document).ready(function(){
 // Dev phrase: granddad haiku uninsured cycle renewably gondola unburned enjoyer throwback gleaming employed grab
 
   // User
-  account = web3.eth.accounts[0];
+  // account = web3.eth.accounts[0];
 
   // Sensor
   // var sensorContractJson = require('./P2PTempInsuranceFactory.json');
@@ -86,22 +64,18 @@ $(document).ready(function(){
   }
 
   function createNewInsurance() {
-    var premium = 1000000;
-    var payout = 10000000;
-    var temp = 3;
-    var isTempBelow = 1;
-    var startTime = 1517003553;
-    var endTime = startTime + 100;
-
-
-    // _payout=payout,
-    // _temperature=temp,
-    // _isTempBelow=isTempBelow,
-    // _startTime=startTime,
-    // _endTime=endTime,
-    // _sensorContract=sensorAddress,
-
-
+    var premium = web3.toWei($("#premium").val())
+    var payout = web3.toWei($("#payout").val())
+    var temp = $("#temp").val()
+    var isTempBelow = $("#isTempBelow").is(':checked')
+    var startTime = $("#startTime").val()
+    var endTime = $("#endTime").val()
+    console.log(premium)
+    console.log(payout)
+    console.log(temp)
+    console.log(isTempBelow)
+    console.log(startTime)
+    console.log(endTime)
     factory.createP2PTempInsurance(
       payout,
       temp,
@@ -110,29 +84,188 @@ $(document).ready(function(){
       endTime,
       sensorAddress,
       {
-        // data: '0x12345...',
-        from: account,
+        from: web3.eth.accounts[0],
         value: premium,
-        // gas: 220000
         gasPrice: 22000000000
       }, web3_callback
     )
   }
 
+
+  const promisify = (inner) =>
+    new Promise((resolve, reject) =>
+      inner((err, res) => {
+        if (err) { reject(err) }
+        resolve(res);
+      })
+    );
+
+  async function getAllInsurances() {
+    log = await promisify(cb => factory.ContractInstantiation({}, {fromBlock: 0, toBlock: 'latest'}).get(cb));
+    console.log(log);
+    var result = []
+    for (var i in log) {
+      temp = log[i].args
+      var instance = insuranceContract.at(log[i].args.instantiation);
+      temp['payout']        = (await promisify(cb => instance.payout.call(cb))).toNumber()
+      temp['lowestPremium'] = (await promisify(cb => instance.lowestPremium.call(cb))).toNumber()
+      temp['startTime']     = (await promisify(cb => instance.startTime.call(cb))).toNumber()
+      temp['endTime']       = (await promisify(cb => instance.endTime.call(cb))).toNumber()
+      temp['temperature']   = (await promisify(cb => instance.temperature.call(cb))).toNumber()
+      temp['isTempBelow']   = (await promisify(cb => instance.isTempBelow.call(cb)))
+      result.push(temp)
+    }
+    console.log(result);
+    return result
+  }
+
+  async function placeBid() {
+    var address = $("#placeBid-address").val()
+    var bid = web3.toWei($("#bid").val())
+    var payout = web3.toWei($("#placeBid-payout").val())
+    var instance = insuranceContract.at(address);
+    console.log(address);
+    txHash = await promisify(cb => (instance.bid(bid,
+        {
+          from: web3.eth.accounts[0],
+          value: payout,
+          gasPrice: 22000000000,
+          gas: 1000000
+        }, cb
+      ))
+    )
+    console.log(txHash);
+  }
+
+  async function withdrawPremium() {
+    var address = $("#withdrawPremium-address").val()
+    var instance = insuranceContract.at(address);
+    txHash = await promisify(cb => (instance.withdrawPremium({},
+        {
+          from: web3.eth.accounts[0],
+          gasPrice: 22000000000,
+          gas: 1000000
+        }, cb
+      ))
+    )
+    console.log(txHash);
+  }
+
+
+  async function withdrawBid() {
+    var address = $("#withdrawBid-address").val()
+    var instance = insuranceContract.at(address);
+    txHash = await promisify(cb => (instance.withdrawBid({},
+        {
+          from: web3.eth.accounts[0],
+          gasPrice: 22000000000,
+          gas: 1000000
+        }, cb
+      ))
+    )
+    console.log(txHash);
+  }
+
+
+  async function withdrawExpired() {
+    var address = $("#withdrawExpired-address").val()
+    var instance = insuranceContract.at(address);
+    txHash = await promisify(cb => (instance.withdrawExpired({},
+        {
+          from: web3.eth.accounts[0],
+          gasPrice: 22000000000,
+          gas: 1000000
+        }, cb
+      ))
+    )
+    console.log(txHash);
+  }
+
+  async function getAddressBids() {
+    var address = $("#addressBids-address").val()
+    var instance = insuranceContract.at(address);
+    log = await promisify(cb => instance.Bid({}, {fromBlock: 0, toBlock: 'latest'}).get(cb));
+    result = []
+    for (i in log) {
+      result.push(log[i].args)
+    }
+    console.log(result);
+    return result
+  }
+
+  async function getPayedOut() {
+    var address = $("#payedout-address").val()
+    var instance = insuranceContract.at(address);
+    log = await promisify(cb => instance.PayedOut({}, {fromBlock: 0, toBlock: 'latest'}).get(cb));
+    console.log(log.length == 1);
+    return log.length == 1
+  }
+
+
+  async function stimulateSensor() {
+    var temperature = $("#sensor-stimuli").val()
+    txHash = await promisify(cb => (sensor.addTemperature(temperature,
+        {
+          from: web3.eth.accounts[0],
+          gasPrice: 22000000000,
+          gas: 1000000
+        }, cb
+      ))
+    )
+    console.log(txHash);
+  }
+
+  async function getTemperature() {
+    log = await promisify(cb => sensor.NewTemperature({}, {fromBlock: 0, toBlock: 'latest'}).get(cb));
+    result = []
+    for (i in log) {
+      blkNum = log[i].blockNumber
+      block = await promisify(cb => web3.eth.getBlock(blkNum, cb))
+      timestamp = block.timestamp
+      result.push({
+        temperature: log[i].args['_temperature'].toNumber(),
+        timestamp: timestamp
+      })
+    }
+    console.log(result);
+    return result
+  }
+
+  async function getContractState(address) {
+    var instance = insuranceContract.at(address);
+    var lowestBidder  = (await promisify(cb => instance.lowestBidder.call(cb)))
+    var startTime     = (await promisify(cb => instance.startTime.call(cb))).toNumber()
+    var endTime       = (await promisify(cb => instance.endTime.call(cb))).toNumber()
+    var payed         = (await promisify(cb => instance.payed.call(cb)))
+    now = Math.round(Date.now()/1000);
+    console.log(lowestBidder);
+    console.log(startTime);
+    console.log(endTime);
+    console.log(payed);
+    console.log(now);
+    if (payed) return "TRIGGERED"
+    if (lowestBidder == "0x0000000000000000000000000000000000000000" && now < startTime) return "INITIATED"
+    if (lowestBidder == "0x0000000000000000000000000000000000000000" && now >= startTime) return "NO_BIDS"
+    if (now < startTime) return "HAS_BIDS"
+    if (now >= startTime && now <= endTime) return "STARTED"
+    return "EXPIRED"
+  }
+
+  async function getContractStateCaller() {
+    var address = $("#contract-state-address").val()
+    console.log(await getContractState(address))
+  }
+
   $("#createContract").on('click', createNewInsurance);
-
-
-
-
-
-  // // deploy new contract
-  // var contractInstance = factoryContract.new([constructorParam1] [, constructorParam2], {data: '0x12345...', from: myAccount, gas: 1000000});
-
-  // // Get the data to deploy the contract manually
-  // var contractData = factoryContract.new.getData([constructorParam1] [, constructorParam2], {data: '0x12345...'});
-  // // contractData = '0x12345643213456000000000023434234'
-
-
-
-  // contract.myMethod.call()
+  $("#getAllInsurances").on('click', getAllInsurances);
+  $("#placeBid").on('click', placeBid);
+  $("#withdrawPremium").on('click', withdrawPremium);
+  $("#withdrawBid").on('click', withdrawBid);
+  $("#withdrawExpired").on('click', withdrawExpired);
+  $("#getAddressBids").on('click', getAddressBids);
+  $("#getPayedOut").on('click', getPayedOut);
+  $("#stimulateSensor").on('click', stimulateSensor);
+  $("#getTemperature").on('click', getTemperature);
+  $("#getContractStateCaller").on('click', getContractStateCaller);
+  
 });
