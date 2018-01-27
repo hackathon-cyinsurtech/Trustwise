@@ -17,7 +17,8 @@ contract P2PTempInsuranceFactory {
         bool _isTempBelow, 
         uint256 _startTime, 
         uint256 _endTime, 
-        address _sensorContract
+        address _sensorContract,
+        string _description
     ) public payable returns (address) {
         P2PTempInsurance newContract = (new P2PTempInsurance).value(msg.value)(
             _payout,
@@ -25,7 +26,8 @@ contract P2PTempInsuranceFactory {
             _isTempBelow, 
             _startTime, 
             _endTime, 
-            _sensorContract
+            _sensorContract,
+            _description
          );
         created[msg.sender].push(address(newContract));
         ContractInstantiation(msg.sender, address(newContract));

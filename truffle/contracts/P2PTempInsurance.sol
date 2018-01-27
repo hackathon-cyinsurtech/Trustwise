@@ -28,6 +28,8 @@ contract P2PTempInsurance is owned {
 
     address public lowestBidder;
 
+    string public description;
+
     mapping (address=>uint256) returnAmounts;
 
     bool public payed;
@@ -39,7 +41,8 @@ contract P2PTempInsurance is owned {
         bool _isTempBelow, 
         uint256 _startTime, 
         uint256 _endTime, 
-        address _sensorContract
+        address _sensorContract,
+        string _description
     ) public payable {
         require(_endTime > _startTime);
 
@@ -49,7 +52,7 @@ contract P2PTempInsurance is owned {
         startTime = _startTime;
         endTime = _endTime;
         sensorContract = _sensorContract;
-        
+        description = _description;
         uint256 fee = msg.value * FEES_PERCENTAGE / 100;
         startPremium = lowestPremium = msg.value - fee;
         require(FEES_RECIPIENT.send(fee));
