@@ -267,5 +267,5 @@ $(document).ready(function(){
   $("#stimulateSensor").on('click', stimulateSensor);
   $("#getTemperature").on('click', getTemperature);
   $("#getContractStateCaller").on('click', getContractStateCaller);
-  
+
 });
