@@ -48,7 +48,7 @@ async function getAllInsurances() {
 
 async function getInsuranceData(address, temp) {
     var insuranceContract = web3.eth.contract(insuranceAbi);
-    var instance = insuranceContract.at(log[i].args.instantiation);
+    var instance = insuranceContract.at(address);
     temp['payout']        = (await promisify(cb => instance.payout.call(cb))).toNumber()
     temp['lowestPremium'] = (await promisify(cb => instance.lowestPremium.call(cb))).toNumber()
     temp['startTime']     = (await promisify(cb => instance.startTime.call(cb))).toNumber()
