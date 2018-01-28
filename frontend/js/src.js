@@ -155,7 +155,7 @@ $(document).ready(function(){
   }
 
   function createNewInsurance() {
-    $("#createContract").prop('disabled', true);
+    // $("#createContract").prop('disabled', true);
     var premium = web3.toWei($("#premium").val())
     var payout = web3.toWei($("#payout").val())
     var temp = $("#temp").val()
