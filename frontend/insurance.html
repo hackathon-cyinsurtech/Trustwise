@@ -1,6 +1,7 @@
 <!doctype html>
 <html lang="en">
 <!-- localhost:2015/insurance.html?address=0x0000000000000000000000000000000000000000&payout=0.1&lowestPremium=0.01&startTime=1518092210&endTime=1519092210&temperature=3&isTempBelow=true -->
+<!-- localhost:2015/insurance.html?hash=0x2A466141734Af29f63fb8a1961496408A44A0E9f&payout=0.1&premium=0.01&start=1518092210&end=1519092210&temp=3&isBelow=true&description=Crops%201 -->
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -56,7 +57,25 @@
             <li id="insurance-startTime" class="list-group-item"></li>
             <li id="insurance-endTime" class="list-group-item"></li>
             <li id="insurance-temperature" class="list-group-item"></li>
+            <li id="insurance-description" class="list-group-item"></li>
           </ul>
+
+        </div>
+      </div>
+
+      <div class="card mb-5 mt-5">
+        <div class="card-header">Place Bid</div>
+        <div class="card-body">
+
+          <div class="input-group">
+            <div class="input-group-prepend">
+              <span class="input-group-text">Bid</span>
+            </div>
+            <input id="bid-price" class="form-control" type="number" aria-label="With textarea" step="0.00001"></input>
+            <input id="bid-address" class="form-control" type="hidden" aria-label="With textarea"></input>
+            <input id="bid-payout" class="form-control" type="hidden" aria-label="With textarea"></input>
+          </div>
+          <button id="placeBid" type="button" class="btn btn-secondary">Place Bid</button>
 
         </div>
       </div>

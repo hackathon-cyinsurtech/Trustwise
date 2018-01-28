@@ -34,5 +34,10 @@ function createInsuranceListItem(hash, status, premium, payout, start, end, desc
 }
 
 $(document).ready(function() {
-
+  getAllInsurances().then(vv => {
+    console.log(vv);
+    vv.forEach(v => {
+      createInsuranceListItem(v.instantiation, 1, web3.fromWei(v.lowestPremium), web3.fromWei(v.payout), v.startTime, v.endTime, "asrdase", v.isTempBelow, v.temperature)
+    })
+  })
 });

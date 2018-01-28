@@ -13,13 +13,14 @@ $(document).ready(function () {
           }
       }
   };
-  address = getUrlParameter('address')
+  address = getUrlParameter('hash')
   payout = getUrlParameter('payout')
-  lowestPremium = getUrlParameter('lowestPremium')
-  startTime = getUrlParameter('startTime')
-  endTime = getUrlParameter('endTime')
-  temperature = getUrlParameter('temperature')
-  isTempBelow = getUrlParameter('isTempBelow')
+  lowestPremium = getUrlParameter('premium')
+  startTime = getUrlParameter('start')
+  endTime = getUrlParameter('end')
+  temperature = getUrlParameter('temp')
+  isTempBelow = getUrlParameter('isBelow')
+  description = getUrlParameter('description')
 
   function formatDate(epoch) {
     return new Date(epoch).toISOString().split('.')[0].replace('T', ' ')
@@ -31,5 +32,12 @@ $(document).ready(function () {
   $('#insurance-startTime').append('Start: ' + formatDate(startTime*1000))
   $('#insurance-endTime').append('End: ' + formatDate(endTime*1000))
   $('#insurance-temperature').append('Condition: ' + (isTempBelow ? 'Below ' : 'Above ') + temperature + '°C')
+  $('#insurance-description').append(description)
+
+  step=0.00001
+  $('#bid-price').attr({
+    max: lowestPremium - step
+  })
+  $('#bid-address').val(address)
 
 })
