@@ -126,11 +126,13 @@ $(document).ready(function(){
   }
 
   async function placeBid() {
-    var address = $("#placeBid-address").val()
-    var bid = web3.toWei($("#bid").val())
-    var payout = web3.toWei($("#placeBid-payout").val())
+    var address = $("#bid-address").val()
+    var bid = web3.toWei($("#bid-price").val())
+    var payout = web3.toWei($("#bid-payout").val())
     var instance = insuranceContract.at(address);
     console.log(address);
+    console.log(bid);
+    console.log(payout);
     txHash = await promisify(cb => (instance.bid(bid,
         {
           from: web3.eth.accounts[0],
