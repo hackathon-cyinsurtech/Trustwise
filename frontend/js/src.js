@@ -33,7 +33,6 @@ const promisify = (inner) =>
   }
 
 async function getAllInsurances() {
-  var insuranceContract = web3.eth.contract(insuranceAbi);
   var factoryContract = web3.eth.contract(factoryAbi);
   // instantiate by address
   var factory = factoryContract.at(factoryAddress);
@@ -48,6 +47,7 @@ async function getAllInsurances() {
 }
 
 async function getInsuranceData(address, temp) {
+    var insuranceContract = web3.eth.contract(insuranceAbi);
     var instance = insuranceContract.at(log[i].args.instantiation);
     temp['payout']        = (await promisify(cb => instance.payout.call(cb))).toNumber()
     temp['lowestPremium'] = (await promisify(cb => instance.lowestPremium.call(cb))).toNumber()
