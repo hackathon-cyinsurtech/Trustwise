@@ -86,64 +86,67 @@
         </div>
       </div>
 
-      <div id="new-contract-card" class="card mb-5 mt-5">
-          <div class="card-header">Insurance model</div>
-          <div class="card-body">
+      <div id="new-contract-card" class="card mb-5 mt-5" style="display: none;">
+        <div class="card-header">Insurance features</div>
+        <div class="card-body">
 
-            <div class="input-group">
-              <div class="input-group-prepend">
-                <span class="input-group-text">Premium</span>
-              </div>
-              <input id="premium" class="form-control" type="number" aria-label="With textarea" step="0.00001"></input>
+          <div class="input-group mb-3">
+            <div class="input-group-prepend">
+              <span class="input-group-text">Premium</span>
             </div>
-            <div class="input-group">
-              <div class="input-group-prepend">
-                <span class="input-group-text">Payout</span>
-              </div>
-              <input id="payout" class="form-control" type="number" aria-label="With textarea" step="0.00001"></input>
-            </div>
-
-            <div class="input-group">
-              <div class="input-group-prepend">
-                <label class="input-group-text" for="isTempBelow">Trigger insurance payout when temperature is</label>
-              </div>
-              <select class="custom-select" id="isTempBelow">
-                <option value="0" selected>Below</option>
-                <option value="1">Above</option>
-              </select>
-            </div>
-
-            <div class="input-group">
-              <div class="input-group-prepend">
-                <span class="input-group-text">Temperature Value</span>
-              </div>
-              <input id="temp" class="form-control" type="number" aria-label="With textarea" step="1"></input>
-            </div>
-
-            <div class="input-group">
-              <div class="input-group-prepend">
-                <span class="input-group-text">Start Time</span>
-              </div>
-              <input id="startTime" class="form-control" type="datetime" aria-label="With textarea"></input>
-            </div>
-
-            <div class="input-group">
-              <div class="input-group-prepend">
-                <span class="input-group-text">End Time</span>
-              </div>
-              <input id="endTime" class="form-control" type="datetime" aria-label="With textarea"></input>
-            </div>
-
-            <div class="input-group">
-              <div class="input-group-prepend">
-                <span class="input-group-text">Description</span>
-              </div>
-              <input id="description" class="form-control" type="text" aria-label="With textarea"></input>
-            </div>
-
-            <button id="createContract" type="button" class="btn btn-secondary">Create Contract</button>
+            <input id="premium" class="form-control" type="number" aria-label="premium" step="0.00001"></input>
           </div>
+          <div class="input-group mb-3">
+            <div class="input-group-prepend">
+              <span class="input-group-text">Payout</span>
+            </div>
+            <input id="payout" class="form-control" type="number" aria-label="payout" step="0.00001"></input>
+          </div>
+
+          <div class="input-group mb-3">
+            <div class="input-group-prepend">
+              <label class="input-group-text" for="isTempBelow">Trigger insurance payout when temperature is</label>
+            </div>
+            <select class="custom-select" id="isTempBelow">
+              <option value="0" selected>Below</option>
+              <option value="1">Above</option>
+            </select>
+          </div>
+
+          <div class="input-group mb-3">
+            <div class="input-group-prepend">
+              <span class="input-group-text">Temperature Value</span>
+            </div>
+            <input id="temp" class="form-control" type="number" aria-label="temperature" step="1"></input>
+          </div>
+
+          <div class="input-group mb-3">
+            <div class="input-group-prepend">
+              <span class="input-group-text">Start Time</span>
+            </div>
+            <input id="startTime" class="form-control" type="datetime" aria-label="start"></input>
+          </div>
+
+          <div class="input-group mb-3">
+            <div class="input-group-prepend">
+              <span class="input-group-text">End Time</span>
+            </div>
+            <input id="endTime" class="form-control" type="datetime" aria-label="end"></input>
+          </div>
+
+          <div class="input-group mb-3">
+            <div class="input-group-prepend">
+              <span class="input-group-text">Insurance Description</span>
+            </div>
+            <input id="description" class="form-control" type="text" aria-label="description"></input>
+          </div>
+
+          <div class="d-flex justify-content-end">
+            <button id="createContract" type="button" class="btn btn-secondary mb-3">Create Contract &raquo;</button>
+          </div>
+          
         </div>
+      </div>
 
     </div>
 
