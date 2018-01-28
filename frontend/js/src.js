@@ -155,12 +155,13 @@ $(document).ready(function(){
   }
 
   function createNewInsurance() {
+    $("#createContract").prop('disabled', true);
     var premium = web3.toWei($("#premium").val())
     var payout = web3.toWei($("#payout").val())
     var temp = $("#temp").val()
     var isTempBelow = $("#isTempBelow").is(':checked')
-    var startTime = $("#startTime").val()
-    var endTime = $("#endTime").val()
+    var startTime = $('#startTime').data('epoch')
+    var endTime = $('#endTime').data('epoch')
     var description = $("#description").val()
     console.log(premium)
     console.log(payout)
@@ -169,7 +170,8 @@ $(document).ready(function(){
     console.log(startTime)
     console.log(endTime)
     console.log(description)
-    promisify(cb => {return factory.createP2PTempInsurance(
+    promisify(cb => {
+      return factory.createP2PTempInsurance.call(
         payout,
         temp,
         isTempBelow,
@@ -182,9 +184,31 @@ $(document).ready(function(){
           value: premium,
           gasPrice: 22000000000
         }, cb
-      )}
-    ).then(txHash => {return getTransactionReceiptMined(txHash)}).
-    then(recepient => alert("Tx mined!"))
+      )
+    })
+    .then(function (address) {
+      promisify(cb => {return factory.createP2PTempInsurance(
+          payout,
+          temp,
+          isTempBelow,
+          startTime,
+          endTime,
+          sensorAddress,
+          description,
+          {
+            from: web3.eth.accounts[0],
+            value: premium,
+            gasPrice: 22000000000
+          }, cb
+        )}
+      ).then(txHash => {
+        return getTransactionReceiptMined(txHash)
+      }).
+      then(recepient => {
+        alert("Tx mined!")
+        window.location = "/insurance.html/?hash=" + address
+      })
+    })
 
   }
 
@@ -328,7 +352,7 @@ $(document).ready(function(){
       {
         from: web3.eth.accounts[0],
         gasPrice: 22000000000,
-        gas: 1000000
+        gas: 20000000
       }, cb
     )))
     console.log(txHash);

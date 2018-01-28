@@ -81,8 +81,8 @@ $(document).ready(function () {
         "format": "X",
         "opens": "center"
     }, function(start, end, label) {
-    console.log('Start date selected: ' + start.format('X'));
-    $("#startTime").data('epoch', start.format('X'))
+      console.log('Start date selected: ' + end.format('X'));
+      $('#startTime').data('epoch', end.format('X'))
     });
 
     $('#endTime').daterangepicker({
@@ -131,8 +131,8 @@ $(document).ready(function () {
         "format": "X",
         "opens": "center"
     }, function(start, end, label) {
-    console.log('Start date selected: ' + start.format('X'));
-    $('#endTime').data('epoch', start.format('X'))
+      console.log('Start date selected: ' + end.format('X'));
+      $('#endTime').data('epoch', end.format('X'))
     });
 
     $("#premium").keyup(function() {
