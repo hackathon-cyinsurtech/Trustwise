@@ -55,6 +55,7 @@ contract('P2PTempInsurance', function (accounts) {
             now + 30,
             now + 300000,
             tempSensorContract.address,
+            'DESCRIPTION',
             {from: bob, value: web3.toWei(200)}
         )
     })
