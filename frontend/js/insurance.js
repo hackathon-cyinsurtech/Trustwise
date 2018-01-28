@@ -38,6 +38,11 @@ $(document).ready(function () {
   $('#bid-price').attr({
     max: lowestPremium - step
   })
+  console.log(address);
   $('#bid-address').val(address)
+  $('#withdrawBid-address').val(address)
+  $('#withdrawExpired-address').val(address)
+  $('#withdrawPremium-address').val(address)
+
 
 })
