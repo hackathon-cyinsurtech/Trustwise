@@ -12,6 +12,31 @@ const promisify = (inner) =>
     })
   );
 
+  function getTransactionReceiptMined(txHash, interval) {
+    const transactionReceiptAsync = function(resolve, reject) {
+        web3.eth.getTransactionReceipt(txHash, (error, receipt) => {
+            if (error) {
+                reject(error);
+            } else if (receipt == null) {
+                setTimeout(
+                    () => transactionReceiptAsync(resolve, reject),
+                    interval ? interval : 500);
+            } else {
+                resolve(receipt);
+            }
+        });
+    };
+
+    if (Array.isArray(txHash)) {
+        return Promise.all(txHash.map(
+            oneTxHash => web3.eth.getTransactionReceiptMined(oneTxHash, interval)));
+    } else if (typeof txHash === "string") {
+        return new Promise(transactionReceiptAsync);
+    } else {
+        throw new Error("Invalid Type: " + txHash);
+    }
+};
+
   async function getContractState(address) {
     var insuranceContract = web3.eth.contract(insuranceAbi);
     var instance = insuranceContract.at(address);
@@ -145,20 +170,23 @@ $(document).ready(function(){
     console.log(startTime)
     console.log(endTime)
     console.log(description)
-    factory.createP2PTempInsurance(
-      payout,
-      temp,
-      isTempBelow,
-      startTime,
-      endTime,
-      sensorAddress,
-      description,
-      {
-        from: web3.eth.accounts[0],
-        value: premium,
-        gasPrice: 22000000000
-      }, web3_callback
-    )
+    promisify(cb => {return factory.createP2PTempInsurance(
+        payout,
+        temp,
+        isTempBelow,
+        startTime,
+        endTime,
+        sensorAddress,
+        description,
+        {
+          from: web3.eth.accounts[0],
+          value: premium,
+          gasPrice: 22000000000
+        }, cb
+      )}
+    ).then(txHash => {return getTransactionReceiptMined(txHash)}).
+    then(recepient => alert("Tx mined!"))
+    
   }
 
 
