@@ -71,14 +71,48 @@
             <div class="input-group-prepend">
               <span class="input-group-text">Bid</span>
             </div>
-            <input id="bid-price" class="form-control" type="number" aria-label="With textarea" step="0.00001"></input>
-            <input id="bid-address" class="form-control" type="hidden" aria-label="With textarea"></input>
-            <input id="bid-payout" class="form-control" type="hidden" aria-label="With textarea"></input>
+            <input id="bid-price" class="form-control" type="number" aria-label="Bid Price" step="0.00001"></input>
+            <input id="bid-address" class="form-control" type="hidden"/>
+            <input id="bid-payout" class="form-control" type="hidden"/>
           </div>
           <button id="placeBid" type="button" class="btn btn-secondary">Place Bid</button>
 
         </div>
       </div>
+
+      <!-- Withdraw Bid -->
+      <div class="card mb-5 mt-5">
+        <div class="card-header">Withdraw Bid</div>
+        <div class="card-body">
+          <div class="input-group">
+            <input id="withdrawBid-address" class="form-control" type="hidden"/>
+          </div>
+          <button id="withdrawBid" type="button" class="btn btn-secondary">Withdraw Bid</button>
+        </div>
+      </div>
+
+      <!-- Withdraw Expired -->
+      <div class="card mb-5 mt-5">
+        <div class="card-header">Withdraw Expired</div>
+        <div class="card-body">
+          <div class="input-group">
+            <input id="withdrawExpired-address" class="form-control" type="hidden"/>
+          </div>
+          <button id="withdrawExpired" type="button" class="btn btn-secondary">Withdraw Expired</button>
+        </div>
+      </div>
+
+      <!-- Withdraw Premium -->
+      <div class="card mb-5 mt-5">
+        <div class="card-header">Withdraw Premium</div>
+        <div class="card-body">
+          <div class="input-group">
+            <input id="withdrawPremium-address" class="form-control" type="hidden"/>
+          </div>
+          <button id="withdrawPremium" type="button" class="btn btn-secondary">Withdraw Premium</button>
+        </div>
+      </div>
+
 
     </div>
 
