@@ -44,11 +44,93 @@ $(document).ready(function () {
         "autoApply": true,
         "linkedCalendars": false,
         "showCustomRangeLabel": false,
-        "startDate": "01/22/2018",
-        "endDate": "01/28/2018",
+        "locale": {
+            "format": "YYYY-MM-DD HH:mm:ss",
+            "separator": " - ",
+            "applyLabel": "Apply",
+            "cancelLabel": "Cancel",
+            "fromLabel": "From",
+            "toLabel": "To",
+            "customRangeLabel": "Custom",
+            "weekLabel": "W",
+            "daysOfWeek": [
+                "Su",
+                "Mo",
+                "Tu",
+                "We",
+                "Th",
+                "Fr",
+                "Sa"
+            ],
+            "monthNames": [
+                "January",
+                "February",
+                "March",
+                "April",
+                "May",
+                "June",
+                "July",
+                "August",
+                "September",
+                "October",
+                "November",
+                "December"
+            ],
+            "firstDay": 1
+        },
+        "format": "X",
         "opens": "center"
     }, function(start, end, label) {
-    console.log("New date range selected: ' + start.format('X') + ' (predefined range: ' + label + ')");
+    console.log('Start date selected: ' + start.format('X'));
+    });
+
+    $('#endTime').daterangepicker({
+        "singleDatePicker": true,
+        "showDropdowns": true,
+        "timePicker": true,
+        "timePicker24Hour": true,
+        "timePickerSeconds": true,
+        "autoApply": true,
+        "linkedCalendars": false,
+        "showCustomRangeLabel": false,
+        "locale": {
+            "format": "YYYY-MM-DD HH:mm:ss",
+            "separator": " - ",
+            "applyLabel": "Apply",
+            "cancelLabel": "Cancel",
+            "fromLabel": "From",
+            "toLabel": "To",
+            "customRangeLabel": "Custom",
+            "weekLabel": "W",
+            "daysOfWeek": [
+                "Su",
+                "Mo",
+                "Tu",
+                "We",
+                "Th",
+                "Fr",
+                "Sa"
+            ],
+            "monthNames": [
+                "January",
+                "February",
+                "March",
+                "April",
+                "May",
+                "June",
+                "July",
+                "August",
+                "September",
+                "October",
+                "November",
+                "December"
+            ],
+            "firstDay": 1
+        },
+        "format": "X",
+        "opens": "center"
+    }, function(start, end, label) {
+    console.log('Start date selected: ' + start.format('X'));
     });
 
     $("#premium").keyup(function() {
