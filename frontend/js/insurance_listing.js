@@ -24,7 +24,7 @@ function createInsuranceListItem(hash, status, premium, payout, start, end, desc
     newListItem += '</h5> <div class="d-flex w-100 justify-content-between"> <h5 class="mb-1">status<span class="badge badge-light ml-1 mr-1">' + statusEnum[status].name;
     newListItem += '</span></h5> <h5>start:<span class="badge badge-light ml-1 mr-1">' + new Date(start*1000).toISOString().split('.')[0].replace('T', ' ');
     newListItem += '</span></h5> </div><div class="d-flex w-100 justify-content-between"> <h5 class="mb-1">premium:<span class="badge badge-info ml-1 mr-1">' + premium + ' ETH';
-    newListItem += '</span></h5> <h5 class="mb-1">trigger:<span class="badge badge-info ml-1 mr-1">' + (isBelow ? "below " : "above ") + temp
+    newListItem += '</span></h5> <h5 class="mb-1">trigger:<span class="badge badge-info ml-1 mr-1">' + (isBelow ? "below " : "above ") + temp + "°C"
     newListItem += '</span></h5> <h5>duration:<span class="badge badge-light ml-1 mr-1">' + getDuration(end-start);
     newListItem += '</span></h5> </div><div class="d-flex w-100 justify-content-between"> <h5 class="mb-1">payout:<span class="badge badge-info ml-1 mr-1">' + payout + ' ETH';
     newListItem += '</span></h5> <h5>end:<span class="badge badge-light ml-1 mr-1">' + new Date(end*1000).toISOString().split('.')[0].replace('T', ' ');
