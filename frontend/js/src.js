@@ -159,7 +159,7 @@ $(document).ready(function(){
     var premium = web3.toWei($("#premium").val())
     var payout = web3.toWei($("#payout").val())
     var temp = $("#temp").val()
-    var isTempBelow = $("#isTempBelow").is(':checked')
+    var isTempBelow = parseInt($("#isTempBelow option:selected")[0].value) === 0
     var startTime = $('#startTime').data('epoch')
     var endTime = $('#endTime').data('epoch')
     var description = $("#description").val()
