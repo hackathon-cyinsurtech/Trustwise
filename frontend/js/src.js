@@ -41,6 +41,13 @@ async function getAllInsurances() {
   var result = []
   for (var i in log) {
     temp = log[i].args
+    temp = await getInsuranceData(log[i].args.instantiation, temp)
+    result.push(temp)
+  }
+  return result
+}
+
+async function getInsuranceData(address, temp) {
     var instance = insuranceContract.at(log[i].args.instantiation);
     temp['payout']        = (await promisify(cb => instance.payout.call(cb))).toNumber()
     temp['lowestPremium'] = (await promisify(cb => instance.lowestPremium.call(cb))).toNumber()
@@ -49,9 +56,8 @@ async function getAllInsurances() {
     temp['temperature']   = (await promisify(cb => instance.temperature.call(cb))).toNumber()
     temp['isTempBelow']   = (await promisify(cb => instance.isTempBelow.call(cb)))
     temp['description']   = (await promisify(cb => instance.description.call(cb)))
-    result.push(temp)
-  }
-  return result
+    temp['owner']   = (await promisify(cb => instance.owner.call(cb)))
+    return temp;
 }
 
 async function placeBid() {
