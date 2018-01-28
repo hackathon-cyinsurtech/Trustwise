@@ -60,6 +60,7 @@ $(document).ready(function () {
     })
     console.log(address);
     $('#bid-address').val(address)
+    $('#bid-payout').val(payout)
     $('#withdrawBid-address').val(address)
     $('#withdrawExpired-address').val(address)
     $('#withdrawPremium-address').val(address)

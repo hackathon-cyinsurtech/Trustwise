@@ -1,7 +1,7 @@
 var factoryAddress = "0x99f94b082A433d1f1a0FD740e59F6D8f96aC3fA1";
 var factoryAbi = [{"constant":true,"inputs":[{"name":"_address","type":"address"}],"name":"getCreated","outputs":[{"name":"","type":"address[]"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[{"name":"","type":"address"},{"name":"","type":"uint256"}],"name":"created","outputs":[{"name":"","type":"address"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[{"name":"","type":"address"}],"name":"isP2PTempInsurance","outputs":[{"name":"","type":"bool"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"name":"_payout","type":"uint256"},{"name":"_temperature","type":"int32"},{"name":"_isTempBelow","type":"bool"},{"name":"_startTime","type":"uint256"},{"name":"_endTime","type":"uint256"},{"name":"_sensorContract","type":"address"},{"name":"_description","type":"string"}],"name":"createP2PTempInsurance","outputs":[{"name":"","type":"address"}],"payable":true,"stateMutability":"payable","type":"function"},{"inputs":[],"payable":false,"stateMutability":"nonpayable","type":"constructor"},{"anonymous":false,"inputs":[{"indexed":true,"name":"sender","type":"address"},{"indexed":true,"name":"instantiation","type":"address"}],"name":"ContractInstantiation","type":"event"}]
 var insuranceAbi = [{"constant":false,"inputs":[],"name":"withdrawExpired","outputs":[{"name":"success","type":"bool"}],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[],"name":"FEES_PERCENTAGE","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[],"name":"endTime","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[],"name":"withdrawBid","outputs":[{"name":"success","type":"bool"}],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":false,"inputs":[{"name":"premium","type":"uint256"}],"name":"bid","outputs":[],"payable":true,"stateMutability":"payable","type":"function"},{"constant":true,"inputs":[],"name":"paybackPremium","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[],"name":"payed","outputs":[{"name":"","type":"bool"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[],"name":"payout","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[],"name":"withdrawPremium","outputs":[{"name":"success","type":"bool"}],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[],"name":"description","outputs":[{"name":"","type":"string"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[],"name":"startTime","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[],"name":"sensorContract","outputs":[{"name":"","type":"address"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[],"name":"owner","outputs":[{"name":"","type":"address"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[],"name":"lowestPremium","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[],"name":"temperature","outputs":[{"name":"","type":"int32"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[],"name":"expiredWithdrawn","outputs":[{"name":"","type":"bool"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[],"name":"lowestBidder","outputs":[{"name":"","type":"address"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[],"name":"isTempBelow","outputs":[{"name":"","type":"bool"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"name":"newOwner","type":"address"}],"name":"transferOwnership","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[],"name":"FEES_RECIPIENT","outputs":[{"name":"","type":"address"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[],"name":"startPremium","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"name":"from","type":"uint256"},{"name":"to","type":"uint256"}],"name":"checkConditions","outputs":[{"name":"_payed","type":"bool"}],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[],"name":"REPEATED_INFRACTIONS","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"inputs":[{"name":"_payout","type":"uint256"},{"name":"_temperature","type":"int32"},{"name":"_isTempBelow","type":"bool"},{"name":"_startTime","type":"uint256"},{"name":"_endTime","type":"uint256"},{"name":"_sensorContract","type":"address"},{"name":"_description","type":"string"}],"payable":true,"stateMutability":"payable","type":"constructor"},{"anonymous":false,"inputs":[{"indexed":true,"name":"_bidder","type":"address"},{"indexed":false,"name":"_value","type":"uint256"}],"name":"Bid","type":"event"},{"anonymous":false,"inputs":[{"indexed":false,"name":"_value","type":"uint256"}],"name":"PremiumWithdrawn","type":"event"},{"anonymous":false,"inputs":[{"indexed":true,"name":"_bidder","type":"address"},{"indexed":false,"name":"_value","type":"uint256"}],"name":"BidWithdrawn","type":"event"},{"anonymous":false,"inputs":[{"indexed":true,"name":"_address","type":"address"},{"indexed":false,"name":"_value","type":"uint256"}],"name":"ExpiredWithdrawn","type":"event"},{"anonymous":false,"inputs":[{"indexed":false,"name":"_value","type":"uint256"}],"name":"PayedOut","type":"event"}]
-var sensorAddress = "0x62613DbC33E793075B59d56F26B2eADF43D99687";
+var sensorAddress = "0xB5cB5ee604C4140997408B476E205D7cc8c9757E";
 var sensorAbi = [{"constant":true,"inputs":[{"name":"id","type":"uint256"}],"name":"getData","outputs":[{"name":"","type":"uint256"},{"name":"","type":"int32"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[],"name":"length","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[{"name":"","type":"uint256"}],"name":"time","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[],"name":"owner","outputs":[{"name":"","type":"address"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[{"name":"","type":"uint256"}],"name":"temperature","outputs":[{"name":"","type":"int32"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"name":"_temperature","type":"int32"}],"name":"addTemperature","outputs":[{"name":"id","type":"uint256"}],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":false,"inputs":[{"name":"newOwner","type":"address"}],"name":"transferOwnership","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"inputs":[],"payable":false,"stateMutability":"nonpayable","type":"constructor"},{"anonymous":false,"inputs":[{"indexed":false,"name":"_temperature","type":"int32"}],"name":"NewTemperature","type":"event"}];
 
 const promisify = (inner) =>
@@ -224,7 +224,7 @@ $(document).ready(function(){
  async function placeBid() {
     var address = $("#bid-address").val()
     var bid = web3.toWei($("#bid-price").val())
-    var payout = web3.toWei($("#bid-payout").val())
+    var payout = $("#bid-payout").val()
     var instance = insuranceContract.at(address);
     console.log(address);
     console.log(bid);
@@ -237,7 +237,13 @@ $(document).ready(function(){
           gas: 1000000
         }, cb
       ))
-    )
+    ).then(txHash => {
+      return getTransactionReceiptMined(txHash)
+    }).
+    then(recepient => {
+      alert("Tx mined!")
+      window.location = "/insurance.html/?hash=" + address
+    })
     console.log(txHash);
   }
 
@@ -259,6 +265,7 @@ $(document).ready(function(){
   async function withdrawBid() {
     var address = $("#withdrawBid-address").val()
     var instance = insuranceContract.at(address);
+    console.log(address)
     txHash = await promisify(cb => (instance.withdrawBid({},
         {
           from: web3.eth.accounts[0],
@@ -370,6 +377,5 @@ $(document).ready(function(){
   $("#getTemperature").on('click', getTemperature);
   $("#getContractStateCaller").on('click', getContractStateCaller);
   $("#checkConditions").on('click', checkConditions);
-
 
 });
