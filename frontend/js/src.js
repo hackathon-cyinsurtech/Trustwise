@@ -85,24 +85,23 @@ async function getInsuranceData(address, temp) {
     return temp;
 }
 
-async function placeBid() {
-  var address = $("#placeBid-address").val()
-  var bid = web3.toWei($("#bid").val())
-  var payout = web3.toWei($("#placeBid-payout").val())
-  var instance = insuranceContract.at(address);
-  console.log(address);
-  txHash = await promisify(cb => (instance.bid(bid,
-      {
-        from: web3.eth.accounts[0],
-        value: payout,
-        gasPrice: 22000000000,
-        gas: 1000000
-      }, cb
-    ))
-  )
-  console.log(txHash);
-}
-
+// async function placeBid() {
+//   var address = $("#placeBid-address").val()
+//   var bid = web3.toWei($("#bid").val())
+//   var payout = web3.toWei($("#placeBid-payout").val())
+//   var instance = insuranceContract.at(address);
+//   console.log(address);
+//   txHash = await promisify(cb => (instance.bid(bid,
+//       {
+//         from: web3.eth.accounts[0],
+//         value: payout,
+//         gasPrice: 22000000000,
+//         gas: 1000000
+//       }, cb
+//     ))
+//   )
+//   console.log(txHash);
+// }
 
 $(document).ready(function(){
 
@@ -186,7 +185,7 @@ $(document).ready(function(){
       )}
     ).then(txHash => {return getTransactionReceiptMined(txHash)}).
     then(recepient => alert("Tx mined!"))
-    
+
   }
 
 
@@ -312,11 +311,27 @@ $(document).ready(function(){
     return result
   }
 
-  
 
   async function getContractStateCaller() {
     var address = $("#contract-state-address").val()
     console.log(await getContractState(address))
+  }
+
+  async function checkConditions() {
+    var from = 0
+    var to = 100
+    var address = $("#checkConditions-address").val()
+    var instance = insuranceContract.at(address);
+    txHash = await promisify(cb => (instance.checkConditions(
+      from,
+      to,
+      {
+        from: web3.eth.accounts[0],
+        gasPrice: 22000000000,
+        gas: 1000000
+      }, cb
+    )))
+    console.log(txHash);
   }
 
   $("#createContract").on('click', createNewInsurance);
@@ -330,5 +345,7 @@ $(document).ready(function(){
   $("#stimulateSensor").on('click', stimulateSensor);
   $("#getTemperature").on('click', getTemperature);
   $("#getContractStateCaller").on('click', getContractStateCaller);
+  $("#checkConditions").on('click', checkConditions);
+
 
 });

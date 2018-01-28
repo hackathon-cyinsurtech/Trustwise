@@ -63,6 +63,7 @@ $(document).ready(function () {
     $('#withdrawBid-address').val(address)
     $('#withdrawExpired-address').val(address)
     $('#withdrawPremium-address').val(address)
+    $('#checkConditions-address').val(address)
   })
 
   getContractState(address)
