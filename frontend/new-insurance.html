@@ -8,6 +8,7 @@
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
     crossorigin="anonymous">
   <link rel="stylesheet" href="/style.css">
+  <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/bootstrap.daterangepicker/2/daterangepicker.css" />
 
   <title>New insurance - trustwise.io</title>
 </head>
@@ -90,12 +91,22 @@
         <div class="card-header">Insurance features</div>
         <div class="card-body">
 
-          <div class="input-group mb-3">
-            <div class="input-group-prepend">
-              <span class="input-group-text">Premium</span>
+          <div class="row">
+            <div class="input-group col-sm-6 mb-3">
+              <div class="input-group-prepend">
+                <span class="input-group-text">Premium</span>
+              </div>
+              <input id="premium" class="form-control" type="number" aria-label="premium" step="0.00001"></input>
             </div>
-            <input id="premium" class="form-control" type="number" aria-label="premium" step="0.00001"></input>
+
+            <div class="input-group col-sm-6 mb-3">
+              <div class="input-group-prepend">
+                <span class="input-group-text">Total cost</span>
+              </div>
+              <input id="total" class="form-control" type="number" aria-label="premium" step="0.00001"></input>
+            </div>
           </div>
+
           <div class="input-group mb-3">
             <div class="input-group-prepend">
               <span class="input-group-text">Payout</span>
@@ -144,7 +155,7 @@
           <div class="d-flex justify-content-end">
             <button id="createContract" type="button" class="btn btn-secondary mb-3">Create Contract &raquo;</button>
           </div>
-          
+
         </div>
       </div>
 
@@ -164,6 +175,8 @@
     crossorigin="anonymous"></script>
   <script src="/js/src.js"></script>
   <script src="/js/input_validation.js"></script>
+  <script type="text/javascript" src="//cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
+  <script type="text/javascript" src="//cdn.jsdelivr.net/bootstrap.daterangepicker/2/daterangepicker.js"></script>
 </body>
 
 </html>
