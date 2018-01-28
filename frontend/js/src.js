@@ -156,7 +156,7 @@ $(document).ready(function(){
 
   function createNewInsurance() {
     // $("#createContract").prop('disabled', true);
-    var premium = web3.toWei($("#premium").val())
+    var premium = web3.toWei($("#total").val())
     var payout = web3.toWei($("#payout").val())
     var temp = $("#temp").val()
     var isTempBelow = parseInt($("#isTempBelow option:selected")[0].value) === 0
@@ -350,7 +350,7 @@ $(document).ready(function(){
 
   async function checkConditions() {
     var from = 0
-    var to = 100
+    var to = 28
     var address = $("#checkConditions-address").val()
     var instance = insuranceContract.at(address);
     txHash = await promisify(cb => (instance.checkConditions(
